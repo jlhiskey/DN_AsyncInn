@@ -17,6 +17,8 @@ namespace DN_AsyncInn.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Composite Key Associations
+            modelBuilder.Entity<HotelRoom>().HasKey(hr => new { hr.HotelID, hr.RoomID });
+            modelBuilder.Entity<RoomAmenities>().HasKey(ra => new { ra.AmenitiesID, ra.RoomID });
 
         }
 
