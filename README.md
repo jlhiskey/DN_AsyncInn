@@ -9,32 +9,32 @@
 ## Example Usage
 ### On Page Load
 
-![index](assets/home.PNG){:height="400px" width="400px"}    
+![index](assets/home.PNG)    
 
 ### All Hotels
 
 #### Index
 
-![index](assets/allHotels.PNG){:height="400px" width="400px"}
+![index](assets/allHotels.PNG)
 
 #### Create New
 
-![index](assets/allHotelsCreate.PNG){:height="400px" width="400px"} 
+![index](assets/allHotelsCreate.PNG)
 
 - After Create Button is selected.
 
-![index](assets/allHotelsCreateSubmit.PNG){:height="400px" width="400px"}
+![index](assets/allHotelsCreateSubmit.PNG)
 
 #### Edit
 
-![index](assets/allHotelsEdit.PNG){:height="400px" width="400px"} 
+![index](assets/allHotelsEdit.PNG)
 
 #### Delete
 
-![index](assets/allHotelsDelete.PNG){:height="400px" width="400px"}
+![index](assets/allHotelsDelete.PNG)
 
 ### Schema Used
-![index](assets/SchemaAsyncInn.PNG)
+![index](assets/hotelSchema.PNG)
 - Used Code Fellows design.
 
 ### Tables:
