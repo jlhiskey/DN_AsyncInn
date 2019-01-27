@@ -34,7 +34,7 @@
 ![index](assets/allHotelsDelete.PNG){:height="400px" width="400px"}
 
 ### Schema Used
-![index](assets/schemaasyncinn.PNG)
+![index](assets/SchemaAsyncInn.PNG)
 - Used Code Fellows design.
 
 ### Tables:
