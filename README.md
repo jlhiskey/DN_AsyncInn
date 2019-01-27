@@ -9,29 +9,29 @@
 ## Example Usage
 ### On Page Load
 
-![index](assets/home.PNG)    
+![Home Index](assets/home.PNG)    
 
 ### All Hotels
 
 #### Index
 
-![index](assets/allHotels.PNG)
+![All Hotels Index](assets/allHotels.PNG)
 
 #### Create New
 
-![index](assets/allHotelsCreate.PNG)
+![All Hotels Create](assets/allHotelsCreate.PNG)
 
 - After Create Button is selected.
 
-![index](assets/allHotelsCreateSubmit.PNG)
+![All Hotels Submit](assets/allHotelsCreateSubmit.PNG)
 
 #### Edit
 
-![index](assets/allHotelsEdit.PNG)
+![All Hotels Edit](assets/allHotelsEdit.PNG)
 
 #### Delete
 
-![index](assets/allHotelsDelete.PNG)
+![Hotel Schema](assets/allHotelsDelete.PNG)
 
 ### Schema Used
 ![index](assets/hotelSchema.PNG)
