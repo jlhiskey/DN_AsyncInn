@@ -34,7 +34,7 @@
 ![All Hotels Delete](assets/allHotelsDelete.PNG)
 
 ### Schema Used
-![Hotel Schema](assets/hotelSchema.PNG)
+![Hotel Schema](/assets/hotelSchema.png)    
 - Used Code Fellows design.
 
 ### Tables:
