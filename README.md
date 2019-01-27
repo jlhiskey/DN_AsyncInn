@@ -1,55 +1,61 @@
 
-# Lab 13-: Async Inn Managmenet System
+# Lab 13: Async Inn Managment System
 
-- This Application is a hypothetical hotel asset management system
-- 
-## Website Components
-
-Your MVC Web Application should contain the following:
-
-  - Add the MVC Middleware and include template routing (the route must be explicitly defined)
-  - Only 1 controller. The home controller, with 3 actions (2 Index, and 1 Results)
-       - Remember the difference between HTTPGET and HTTPPOST
-       - Upon posting back to the server, call the Results action to redirect to the results view.
-  - Views to generate the home page and search results
-    - Use a form tag to accept user input
-    - Use Tag Helpers to help redirect you from results page to the Home page. (HINT: the _ViewImports.cshml file may be required)
-  - Include HTML/CSS in your final product. This is required.
-    - It doesn’t have to be fancy, just make it look nice.
-  - Enable use of Static Files in your website and create a style sheet and incorporate some creativity into your application.
-  - A model class named TimePerson that contains the following properties(these are the headers of the csv file):
-	- public int Year { get; set; }
-	- public string Honor { get; set; }
-	- public string Name { get; set; }
-	- public string Country { get; set; }
-	- public int BirthYear { get; set; }
-	- public int DeathYear { get; set; }
-	- public string Title { get; set; }
-	- public string Category { get; set; }
-	- public string Context { get; set; }
-
-   - Create a static method within this model named GetPersons that brings in the range of years, and returns List< TimePerson >.
-   - Create the internal logic to read in the file, filter the data from the given inputted range using LINQ queries and Lambda expressions, and return the final filtered list of persons.
-
+- This Application is a hypothetical hotel asset management system using Entity Framework in an MVC application.
    
 ## Resources
-- MVC Setup https://codefellows.github.io/code-401-dotnet-guide/Curriculum/Class11/Resources/MVCSetup.html
-- MVC Tutorial https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-2.2&tabs=visual-studio&viewFallbackFrom=aspnetcore-2.1
+- MVC Setup https://github.com/codefellows/seattle-dotnet-401d6/blob/master/Class13/MVCSetup.md
 
 ## Example Usage
 ### On Page Load
-When the site loads you will see a window explaining the site and at the bottom of the page you will see a form that accepts years between 1927 and 2016.
 
-![index](assets/index.PNG)    
+![index](assets/home.PNG){:height="400px" width="400px"}    
 
-### Conducting A Query
-Enter in a year between 1927 and 2016 into each field and press submit.
+### All Hotels
 
-Note: If the second number is less than the first number then you will be reset back to the initial form.
+#### Index
 
-![index](assets/search.PNG) 
+![index](assets/allHotels.PNG){:height="400px" width="400px"}
 
-### Viewing Results
-After the submit button is pressed you will see a table of results showing the name of the person of the year, that persons titles and the year that they were person of the year. Below the table you will see a Search Again button which when pressed will take you back to the initial form. 
+#### Create New
 
-![index](assets/result.PNG) 
+![index](assets/allHotelsCreate.PNG){:height="400px" width="400px"} 
+
+- After Create Button is selected.
+
+![index](assets/allHotelsCreateSubmit.PNG){:height="400px" width="400px"}
+
+#### Edit
+
+![index](assets/allHotelsEdit.PNG){:height="400px" width="400px"} 
+
+#### Delete
+
+![index](assets/allHotelsDelete.PNG){:height="400px" width="400px"}
+
+### Schema Used
+![index](assets/SchemaAsyncInn.PNG){:height="800px" width="800px"}
+- Used Code Fellows design.
+
+### Tables:
+
+#### Primary Tables
+##### Hotel
+- **Hotel** table is a collection of all Hotels. A **Hotel** can have multiple **Room**'s which are joined through the **HotelRoom** table.
+
+##### Room
+- **Room** table is a collection of all Room types. A **Room** can have multiple **Amenities**'s which are joined through the **RoomAmenities** table.
+
+##### Amenities
+- **Amenities** table is a collection of all Amenities types. **Amenities** can be in multiple **Room**'s which are joined through the **RoomAmenities** table.
+
+#### Join Tables
+
+##### HotelRoom
+- **HotelRoom** table is a collection of all **Room**'s in a single **Hotel**. A **HotelRoom** table is an entity join table of **Room** and **Hotel** using **HotelID** and **RoomNumber** as a Composite Key. This table also provides a payload of **Price** and **PetFriendly**.
+
+##### RoomAmenities
+- **RoomAmenities** table is a collection of all **Amenities** in a single **Room**. A **RoomAmenities** table is an entity join table of **Room** and **Amenities** using **RoomID** and **AmenitiesID** as a Composite Key.
+
+
+
