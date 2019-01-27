@@ -12,5 +12,10 @@ namespace DN_AsyncInn.Models
         public decimal RoomID { get; set; }
         public decimal Rate { get; set; }
         public bool PetFriendly { get; set; }
+
+        //Navigation Properties
+
+        public Room Room { get; set; }
+        public Hotel Hotel { get; set; }
     }
 }
