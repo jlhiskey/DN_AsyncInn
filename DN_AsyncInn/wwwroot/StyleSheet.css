@@ -1,0 +1,87 @@
+﻿body {
+    width: 95%;
+    margin: auto;
+    text-align: center;
+}
+
+#buttons {
+    float: right;
+    position: relative;
+    left: -50%;
+    text-align: left;
+}
+
+    #buttons ul {
+        list-style: none;
+        position: relative;
+        left: 50%;
+    }
+
+    #buttons li {
+        float: left;
+        position: relative;
+    }
+
+    #buttons a {
+        text-decoration: none;
+        margin: 10px;
+        background: gray;
+        float: left;
+        border: 2px outset black;
+        color: #fff;
+        padding: 2px 5px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+        #buttons a:hover {
+            border: 2px lightgrey;
+            color: black;
+            background: #f2f2f2;
+        }
+
+#content {
+    overflow: hidden
+}
+/* hide horizontal scrollbar*/
+
+table, th, td {
+    margin-top: 20px;
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    box-shadow: 2px 2px grey;
+    margin-bottom: 20px;
+    align-content: center;
+}
+
+th {
+    text-align: left;
+}
+
+table tr:nth-child(even) {
+    background-color: lightgrey;
+}
+
+table tr:nth-child(odd) {
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+    margin: 10px;
+    background: gray;
+    border: 2px outset black;
+    color: #fff;
+    padding: 2px 5px;
+    text-align: center;
+    white-space: nowrap;
+    align-content: center;
+}
+
+    a:hover {
+        border: 2px lightgrey;
+        color: black;
+        background: #f2f2f2;
+        align-content: center;
+    }
