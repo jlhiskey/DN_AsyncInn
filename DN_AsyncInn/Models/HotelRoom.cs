@@ -12,11 +12,13 @@ namespace DN_AsyncInn.Models
         
         [Display(Name = "Hotel")]
         public int HotelID { get; set; }
+        [Required]
         public int RoomNumber { get; set; }
 
         
         [Display(Name = "Room")]
         public decimal RoomID { get; set; }
+        [Required]
         public decimal Rate { get; set; }
         public bool PetFriendly { get; set; }
 

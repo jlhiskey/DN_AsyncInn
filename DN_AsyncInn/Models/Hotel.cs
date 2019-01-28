@@ -10,8 +10,11 @@ namespace DN_AsyncInn.Models
     {
         public int ID { get; set; }
         [Display(Name = "Hotel Name")]
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         public string Phone { get; set; }
 
         //Navigation Properties
