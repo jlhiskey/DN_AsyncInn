@@ -13,6 +13,7 @@ namespace DN_AsyncInn.Models
         
         public int ID { get; set; }
 
+        [Display(Name = "Room Name")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Layout Must Be Selected")]
