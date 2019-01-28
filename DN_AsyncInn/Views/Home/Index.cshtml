@@ -4,17 +4,7 @@
 
 </head>
 <body>
-    <h1>Navigation Bar</h1>
-    <div id="buttons">
-        <ul align="center">
-            <li><a asp-controller="Hotel" asp-action="Index">All Hotels</a></li>
-            <li><a asp-controller="Amenities" asp-action="Index">All Amenities</a></li>
-            <li><a asp-controller="Room" asp-action="Index">All Rooms</a></li>
-            <li><a asp-controller="HotelRoom" asp-action="Index">Hotel Rooms</a></li>
-            <li><a asp-controller="RoomAmenities" asp-action="Index">Room Amenities</a></li>
-        </ul>
-    </div>
-
+  
     <div class="container" style="margin-top:30px">
 
         <ul class="nav nav-tabs">
@@ -32,6 +22,8 @@
                     <a asp-controller="Room" asp-action="Index">List All Existing Room Types</a>
                     <div class="dropdown-divider"></div>
                     <a asp-controller="Room" asp-action="Create">Create New Room Type</a>
+                    <div class="dropdown-divider"></div>
+                    <a asp-controller="RoomAmenities" asp-action="Create">Create New Room Amenity</a>
                 </div>
             </li>
             <li class="nav-item">
