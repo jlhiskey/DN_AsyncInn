@@ -56,7 +56,6 @@ namespace DN_AsyncInn.Models.Services
             _context.Rooms.Update(room);
             _context.SaveChanges();
         }
-
         
     }
 }
