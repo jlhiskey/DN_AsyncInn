@@ -7,21 +7,21 @@ namespace DN_AsyncInn.Models.Interfaces
 {
     public interface IAmenitiesManager
     {
-        //Create Amenities
+        //Create amenity
         Task CreateAmenity(Amenities amenity);
 
-        //Read Amenity
-        Task<Room> GetAmenity(int id);
+        //Read amenity
+        Task<Amenities> GetAmenity(int id);
 
-        //Read All Rooms
-        Task<IEnumerable<Amenities>> GetRooms();
+        //Read All Amenities
+        Task<IEnumerable<Amenities>> GetAmenities();
 
-        Task<Amenities> GetAmenities(string name);
+        Task<Amenities> GetAmenity(string name);
 
-        //Update Amenity
+        //Update amenity
         void UpdateAmenity(Amenities amenity);
 
-        //Delete Amenity
+        //Delete amenity
         void DeleteAmenity(Amenities amenity);
 
         void DeleteAmenity(int id);

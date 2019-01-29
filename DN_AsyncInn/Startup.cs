@@ -35,6 +35,7 @@ namespace DN_AsyncInn
 
             services.AddScoped<IHotelManager, HotelManagmentService>();
             services.AddScoped<IRoomManager, RoomManagementService>();
+            services.AddScoped<IAmenitiesManager, AmenitiesManagementService>();
             //TODO Add other managers.
         }
 
