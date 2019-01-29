@@ -1,5 +1,5 @@
 
-# Lab 13: Async Inn Managment System
+# Lab 13-14: Async Inn Managment System
 
 - This Application is a hypothetical hotel asset management system using Entity Framework in an MVC application.
    
