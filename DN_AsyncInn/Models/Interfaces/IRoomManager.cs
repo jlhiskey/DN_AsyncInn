@@ -11,12 +11,12 @@ namespace DN_AsyncInn.Models.Interfaces
         Task CreateRoom(Room room);
 
         //Read Room
-        Task<Hotel> GetRoom(int id);
+        Task<Room> GetRoom(int id);
 
         //Read All Rooms
         Task<IEnumerable<Room>> GetRooms();
 
-        Task<Hotel> GetRoom(string Name);
+        Task<Room> GetRoom(string name);
 
         //Update Room
         void UpdateRoom(Room room);

@@ -16,7 +16,7 @@ namespace DN_AsyncInn.Models.Interfaces
         //Read All Hotels
         Task<IEnumerable<Hotel>> GetHotels();
 
-        Task<Hotel> GetHotel(string Name);
+        Task<Hotel> GetHotel(string name);
 
         //Update Hotel
         void UpdateHotel(Hotel hotel);
