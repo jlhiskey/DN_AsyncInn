@@ -88,6 +88,12 @@ namespace DN_AsyncInn.Data
                     ID = 5,
                     Name = "Seahawks Snooze",
                     Layout = Layout.Studio
+                },
+                new Room
+                {
+                    ID = 6,
+                    Name = "Wu Tang",
+                    Layout = Layout.Studio
                 }
             );
 
