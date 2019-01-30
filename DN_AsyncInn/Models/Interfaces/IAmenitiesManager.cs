@@ -25,5 +25,8 @@ namespace DN_AsyncInn.Models.Interfaces
         void DeleteAmenity(Amenities amenity);
 
         void DeleteAmenity(int id);
+
+        //Search Amenities
+        Task<IEnumerable<Amenities>> SearchAmenities(string searchString);
     }
 }

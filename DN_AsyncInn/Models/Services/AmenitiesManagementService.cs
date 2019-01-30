@@ -56,5 +56,15 @@ namespace DN_AsyncInn.Models.Services
             _context.Amenities.Remove(amenity);
             _context.SaveChanges();
         }
+
+        public async Task<IEnumerable<Amenities>> SearchAmenities(string searchString)
+        {
+            var amenities = from a in _context.Amenities
+                         select a;
+
+            amenities = amenities.Where(a => a.Name.Contains(searchString));
+
+            return await amenities.ToListAsync();
+        }
     }
 }
