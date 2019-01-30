@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DN_AsyncInn.Data;
 using DN_AsyncInn.Models;
+using DN_AsyncInn.Models.Interfaces;
 
 namespace DN_AsyncInn.Controllers
 {
@@ -25,6 +26,8 @@ namespace DN_AsyncInn.Controllers
             var asyncInnDbContext = _context.HotelRooms.Include(h => h.Hotel);
             return View(await asyncInnDbContext.ToListAsync());
         }
+
+        
 
         // GET: HotelRoom/Details/5
         public async Task<IActionResult> Details(int? id)
