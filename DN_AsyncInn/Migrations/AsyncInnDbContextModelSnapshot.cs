@@ -25,7 +25,8 @@ namespace DN_AsyncInn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -65,11 +66,14 @@ namespace DN_AsyncInn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address");
+                    b.Property<string>("Address")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -142,7 +146,8 @@ namespace DN_AsyncInn.Migrations
 
                     b.Property<int>("Layout");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -178,6 +183,12 @@ namespace DN_AsyncInn.Migrations
                             ID = 5,
                             Layout = 0,
                             Name = "Seahawks Snooze"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Layout = 0,
+                            Name = "Wu Tang"
                         });
                 });
 
