@@ -58,5 +58,20 @@ namespace DN_AsyncInn.Models.Services
         {
             return await _context.Hotels.ToListAsync();
         }
+
+        /// <summary>
+        /// Accepts a string and searches hotels for matching string and returns all hotels that contain that string.
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Hotel>> SearchHotels(string searchString)
+        {
+            var hotels = from h in _context.Hotels
+                         select h;
+            
+            hotels = hotels.Where(h => h.Name.Contains(searchString));
+            
+            return await hotels.ToListAsync();
+        }
     }
 }

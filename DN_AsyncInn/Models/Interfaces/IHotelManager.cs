@@ -25,5 +25,8 @@ namespace DN_AsyncInn.Models.Interfaces
         void DeleteHotel(Hotel hotel);
 
         void DeleteHotel(int id);
+
+        //SearchHotel
+        Task<IEnumerable<Hotel>> SearchHotels(string searchString);
     }
 }

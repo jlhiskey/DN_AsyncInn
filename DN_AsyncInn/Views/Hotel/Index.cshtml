@@ -10,6 +10,14 @@
     <p>
         <a class="btn btn-primary" asp-action="Create">Create New</a>
     </p>
+
+    <form asp-controller="Hotel" asp-action="Index">
+        <p>
+            Hotel Name: <input type="text" name="SearchString" method="get">
+            <input class="btn btn-primary" type="submit" value="Filter" />
+        </p>
+    </form>
+
     <table class="table" align="center">
         <thead>
 
