@@ -25,5 +25,8 @@ namespace DN_AsyncInn.Models.Interfaces
         void DeleteRoom(Room room);
 
         void DeleteRoom(int id);
+
+        //Search Rooms
+        Task<IEnumerable<Room>> SearchRooms(string searchString);
     }
 }

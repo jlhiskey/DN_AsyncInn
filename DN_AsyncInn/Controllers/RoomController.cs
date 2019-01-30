@@ -20,9 +20,14 @@ namespace DN_AsyncInn.Controllers
             _context = context;
         }
 
-        // GET: Room
-        public async Task<IActionResult> Index()
+        // GET: Room and Search
+        public async Task<IActionResult> Index(string searchString)
         {
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.SearchRooms(searchString));
+            }
             return View(await _context.GetRooms());
         }
 

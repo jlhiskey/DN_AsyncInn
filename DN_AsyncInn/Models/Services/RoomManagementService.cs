@@ -56,6 +56,21 @@ namespace DN_AsyncInn.Models.Services
             _context.Rooms.Update(room);
             _context.SaveChanges();
         }
-        
+
+        /// <summary>
+        /// Accepts a string and searches rooms for matching string and returns all rooms that contain that string.
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Room>> SearchRooms(string searchString)
+        {
+            var rooms = from r in _context.Rooms
+                         select r;
+
+            rooms = rooms.Where(r => r.Name.Contains(searchString));
+
+            return await rooms.ToListAsync();
+        }
+
     }
 }
