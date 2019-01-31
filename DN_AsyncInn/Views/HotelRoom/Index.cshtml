@@ -25,7 +25,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Hotel)
                 </th>
-                
+                <th>
+                    @Html.DisplayNameFor(model => model.Hotel.HotelRooms.Count)
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -43,7 +45,7 @@
                     @Html.DisplayFor(modelItem => item.PetFriendly)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Hotel.ID)
+                    @Html.DisplayFor(modelItem => item.Hotel.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Hotel.HotelRooms.Count)

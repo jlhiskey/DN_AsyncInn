@@ -16,6 +16,7 @@ namespace DN_AsyncInn.Models.Services
         public HotelManagmentService(AsyncInnDbContext context)
         {
             _context = context;
+           
         }
 
         public async Task CreateHotel(Hotel hotel)
@@ -73,5 +74,8 @@ namespace DN_AsyncInn.Models.Services
             
             return await hotels.ToListAsync();
         }
+
+
+        
     }
 }

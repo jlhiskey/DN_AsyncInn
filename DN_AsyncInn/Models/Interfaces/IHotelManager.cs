@@ -28,5 +28,6 @@ namespace DN_AsyncInn.Models.Interfaces
 
         //Search Hotels
         Task<IEnumerable<Hotel>> SearchHotels(string searchString);
+
     }
 }
