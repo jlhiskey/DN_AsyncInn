@@ -8,6 +8,7 @@
     }
 
     <h1>All Hotels</h1>
+    <div>Total number of Hotels: @Model.Count()  </div>
 
     <p>
         <a class="btn btn-primary" asp-action="Create">Create New</a>
@@ -35,7 +36,7 @@
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.HotelRooms.Count)
+                    @Html.DisplayNameFor(model => model.HotelRooms)
                 </th>
 
                 <th></th>
