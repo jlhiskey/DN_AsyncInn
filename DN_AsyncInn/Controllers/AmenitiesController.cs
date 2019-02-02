@@ -142,6 +142,7 @@ namespace DN_AsyncInn.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var amenity = await _context.GetAmenity(id);
+            _context.DeleteAmenity(amenity);
             return RedirectToAction(nameof(Index));
         }
 
