@@ -31,11 +31,18 @@ namespace DN_AsyncInn.Models.Services
             _context.SaveChanges();
         }
 
-        public void DeleteHotel(int id)
+        public async Task DeleteHotel(int id)
         {
-            Hotel hotel = _context.Hotels.FirstOrDefault(h => h.ID == id);
+            Hotel hotel = _context.Hotels.FirstOrDefault(ho => ho.ID == id);
             _context.Hotels.Remove(hotel);
-            _context.SaveChanges();
+
+            var hotelRooms = await _context.HotelRooms.Where(hr => hr.HotelID == hotel.ID).ToListAsync();
+            foreach (HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Hotel> GetHotel(int id)
