@@ -23,16 +23,29 @@ namespace DN_AsyncInn.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        public void DeleteRoom(Room room)
+        public async Task DeleteRoom(Room room)
         {
             _context.Rooms.Remove(room);
+
+            var hotelRooms = await _context.HotelRooms.Where(hr => hr.RoomID == room.ID).ToListAsync();
+            foreach (HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
             _context.SaveChanges();
         }
 
-        public void DeleteRoom(int id)
+        public async Task DeleteRoom(int id)
         {
             Room room = _context.Rooms.FirstOrDefault(r => r.ID == id);
             _context.Rooms.Remove(room);
+
+            var hotelRooms = await _context.HotelRooms.Where(hr => hr.RoomID == room.ID).ToListAsync();
+            foreach (HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
+
             _context.SaveChanges();
         }
 
@@ -48,7 +61,13 @@ namespace DN_AsyncInn.Models.Services
 
         public async Task<IEnumerable<Room>> GetRooms()
         {
-            return await _context.Rooms.ToListAsync();
+            var rooms = await _context.Rooms.ToListAsync();
+
+            foreach (Room room in rooms) // loop through and identify in  hotel room table where hotelID is equal to current hotels ID, push into Rooms
+            {
+                room.RoomAmenities = await _context.RoomAmenities.Where(ra => ra.RoomID == room.ID).ToListAsync();
+            }
+            return rooms;
         }
 
         public void UpdateRoom(Room room)

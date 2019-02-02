@@ -24,6 +24,8 @@ namespace DN_AsyncInn.Models
         //Navigation Properties
 
         public ICollection<HotelRoom> HotelRooms { get; set; }
+
+        [Display(Name = "Total Room Amenities")]
         public ICollection<RoomAmenities> RoomAmenities { get; set; }
     }
 

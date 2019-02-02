@@ -22,9 +22,9 @@ namespace DN_AsyncInn.Models.Interfaces
         void UpdateRoom(Room room);
 
         //Delete Room
-        void DeleteRoom(Room room);
+        Task DeleteRoom(Room room);
 
-        void DeleteRoom(int id);
+        Task DeleteRoom(int id);
 
         //Search Rooms
         Task<IEnumerable<Room>> SearchRooms(string searchString);
