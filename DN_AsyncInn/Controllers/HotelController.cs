@@ -104,6 +104,7 @@ namespace DN_AsyncInn.Controllers
                 try
                 {
                      _context.UpdateHotel(hotel);
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {

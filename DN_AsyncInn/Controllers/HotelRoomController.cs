@@ -76,19 +76,21 @@ namespace DN_AsyncInn.Controllers
         }
 
         // GET: HotelRoom/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        
+        public async Task<IActionResult> Edit(int hotelID, decimal roomID, int roomNumber)
         {
-            if (id == null)
+            if (hotelID == 0 || roomID == 0)
             {
                 return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            var hotelRoom = await _context.HotelRooms.FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID && m.RoomNumber == roomNumber);
+            
             if (hotelRoom == null)
             {
                 return NotFound();
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+            
             return View(hotelRoom);
         }
 
@@ -97,9 +99,9 @@ namespace DN_AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
+        public async Task<IActionResult> Edit(int hotelID, [Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
-            if (id != hotelRoom.HotelID)
+            if (hotelID != hotelRoom.HotelID)
             {
                 return NotFound();
             }
@@ -124,8 +126,7 @@ namespace DN_AsyncInn.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
-            ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomID);
+            
             return View(hotelRoom);
         }
 
