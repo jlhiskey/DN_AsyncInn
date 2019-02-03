@@ -47,7 +47,9 @@
                 </td>
                 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber}) |
+                    @Html.ActionLink("Edit", "Edit", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
+                    @Html.ActionLink("Details", "Details", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
 
                 </td>
             </tr>

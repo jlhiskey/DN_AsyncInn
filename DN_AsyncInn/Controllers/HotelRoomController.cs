@@ -30,17 +30,15 @@ namespace DN_AsyncInn.Controllers
         
 
         // GET: HotelRoom/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int hotelID, decimal roomID, int roomNumber)
         {
-            if (id == null)
+            if (hotelID == 0 || roomID == 0)
             {
                 return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms
-                .Include(h => h.Hotel)
-                .Include(h => h.Room)
-                .FirstOrDefaultAsync(m => m.HotelID == id);
+            var hotelRoom = await _context.HotelRooms.FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID && m.RoomNumber == roomNumber);
+
             if (hotelRoom == null)
             {
                 return NotFound();
