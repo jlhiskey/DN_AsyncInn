@@ -819,6 +819,101 @@ namespace AsyncInnTestSuite
                     }
                 }
             }
+
+            public class RoomServicesTestSuite
+            {
+                public Room CreateRoom()
+                {
+                    Room testRoom = new Room()
+                    {
+                        ID = 1,
+                        Name = "name",
+                        Layout = Layout.OneBedroom
+                    };
+                    return testRoom;
+                }
+
+                [Fact]
+                public async void CanCreateRoom()
+                {
+                    DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateRoom").Options;
+
+                    using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                    {
+                        Room testRoom = CreateRoom();
+
+                        RoomManagementService roomServices = new RoomManagementService(context);
+
+                        await roomServices.CreateRoom(testRoom);
+
+                        var result = context.Rooms.FirstOrDefault(a => a.ID == testRoom.ID);
+
+                        Assert.Equal(testRoom, result);
+                    }
+                }
+
+                [Fact]
+                public async void CanReadRoom()
+                {
+                    DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("GetRoom").Options;
+
+                    using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                    {
+                        Room testRoom = CreateRoom();
+
+                        RoomManagementService roomServices = new RoomManagementService(context);
+
+                        await roomServices.CreateRoom(testRoom);
+                        await roomServices.GetRoom(testRoom.ID);
+
+                        var result = context.Rooms.FirstOrDefault(a => a.ID == testRoom.ID);
+
+                        Assert.Equal(testRoom, result);
+                    }
+                }
+
+                [Fact]
+                public async void CanUpdateRoom()
+                {
+                    DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("UpdateRoom").Options;
+
+                    using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                    {
+                        Room testRoom = CreateRoom();
+
+                        RoomManagementService roomServices = new RoomManagementService(context);
+
+                        await roomServices.CreateRoom(testRoom);
+                        testRoom.Name = "bob";
+                        roomServices.UpdateRoom(testRoom);
+
+                        var result = context.Rooms.FirstOrDefault(a => a.ID == testRoom.ID);
+
+                        Assert.Equal(testRoom, result);
+                    }
+                }
+
+                [Fact]
+                public async void CanDeleteRoom()
+                {
+                    DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("DeleteRoom").Options;
+
+                    using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                    {
+                        Room testRoom = CreateRoom();
+
+                        RoomManagementService roomServices = new RoomManagementService(context);
+
+                        await roomServices.CreateRoom(testRoom);
+
+                        await roomServices.DeleteRoom(testRoom);
+
+                        var result = context.Hotels.FirstOrDefault(a => a.ID == testRoom.ID);
+
+                        Assert.Null(result);
+                    }
+                }
+            }
         }
     }
 }
