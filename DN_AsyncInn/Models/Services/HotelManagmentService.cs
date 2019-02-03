@@ -88,7 +88,18 @@ namespace DN_AsyncInn.Models.Services
             return await hotels.ToListAsync();
         }
 
+        /// <summary>
+        /// I created this but its not being implemented even though I know it should be. I ran out of time...
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<HotelRoom>> GetHotelRooms(int hotelID)
+        {
+            var hotelRooms = from hr in _context.HotelRooms
+                             select hr;
+            hotelRooms = hotelRooms.Where(hr => hr.HotelID == hotelID);
 
-        
+            return await hotelRooms.ToListAsync();
+        }
     }
 }
