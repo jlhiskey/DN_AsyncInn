@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DN_AsyncInn.Data;
 using DN_AsyncInn.Models;
-using DN_AsyncInn.Models.Interfaces;
+
 
 namespace DN_AsyncInn.Controllers
 {
@@ -129,6 +129,8 @@ namespace DN_AsyncInn.Controllers
                         throw;
                     }
                 }
+                ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+                ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomID);
                 return RedirectToAction(nameof(Index));
             }
             
