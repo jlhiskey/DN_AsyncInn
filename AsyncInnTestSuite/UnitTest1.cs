@@ -91,8 +91,7 @@ namespace AsyncInnTestSuite
         }
 
         public class RoomTestSuite
-        {
-            
+        {   
             Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom};
 
             [Fact]
@@ -111,6 +110,23 @@ namespace AsyncInnTestSuite
             public void TestingLayout()
             {
                 Assert.Equal(Layout.OneBedroom, testRoom.Layout);
+            }
+        }
+
+        public class RoomAmenitiesTestSuite
+        {
+            RoomAmenities testRoomAmenity = new RoomAmenities() { AmenitiesID = 1, RoomID = 1 };
+
+            [Fact]
+            public void TestingID()
+            {
+                Assert.Equal(1, testRoomAmenity.AmenitiesID);
+            }
+
+            [Fact]
+            public void TestingName()
+            {
+                Assert.Equal(1, testRoomAmenity.RoomID);
             }
         }
     }
