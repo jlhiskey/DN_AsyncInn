@@ -8,6 +8,7 @@ using DN_AsyncInn.Models;
 using DN_AsyncInn.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using Microsoft.EntityFrameworkCore.Design;
 
 
 namespace AsyncInnTestSuite
