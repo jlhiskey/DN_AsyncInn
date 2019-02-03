@@ -311,6 +311,61 @@ namespace AsyncInnTestSuite
                 testHotelRoom.PetFriendly = false;
                 Assert.False(testHotelRoom.PetFriendly);
             }
+
+            [Fact]
+            public void TestingRoomGet()
+            {
+                HotelRoom testHotelRoom = CreateHotelRoom();
+ 
+                List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
+                ICollection<HotelRoom> hotelRooms = testList1;
+                Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
+
+                Assert.Equal(testRoom.ID, testHotelRoom.Room.ID);
+            }
+
+            [Fact]
+            public void TestingRoomSet()
+            {
+                HotelRoom testHotelRoom = CreateHotelRoom();
+
+                List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
+                ICollection<HotelRoom> hotelRooms = testList1;
+                
+                Room testRoom = new Room() { ID = 2, Name = "name2", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
+
+                testHotelRoom.Room = testRoom;
+
+                Assert.Equal(testRoom.ID, testHotelRoom.Room.ID);
+            }
+
+            [Fact]
+            public void TestingHotelGet()
+            {
+                HotelRoom testHotelRoom = CreateHotelRoom();
+
+                List<HotelRoom> testList = new List<HotelRoom>() { testHotelRoom, };
+                ICollection<HotelRoom> hotelRooms = testList;
+
+                Hotel testHotel = new Hotel() { ID = 1, Name = "name", Address = "address", Phone = "123-123-1234", HotelRooms = hotelRooms };
+
+                Assert.Equal(testHotel.ID, testHotelRoom.Hotel.ID);
+            }
+
+            [Fact]
+            public void TestingHotelSet()
+            {
+                HotelRoom testHotelRoom = CreateHotelRoom();
+
+                List<HotelRoom> testList = new List<HotelRoom>() { testHotelRoom, };
+                ICollection<HotelRoom> hotelRooms = testList;
+
+                Hotel testHotel = new Hotel() { ID = 2, Name = "name", Address = "address", Phone = "123-123-1234", HotelRooms = hotelRooms };
+
+                testHotelRoom.Hotel = testHotel;
+
+                Assert.Equal(testHotel.ID, testHotelRoom.Hotel.ID);
+            }
         }
 
         public class RoomTestSuite
