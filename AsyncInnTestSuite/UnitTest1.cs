@@ -4,9 +4,6 @@ using DN_AsyncInn.Models;
 using DN_AsyncInn.Models.Services;
 using Xunit;
 
-
-
-
 namespace AsyncInnTestSuite
 {
     public class ModelTestSuite
@@ -90,6 +87,30 @@ namespace AsyncInnTestSuite
             public void TestingPetFriendly()
             {
                 Assert.True(testHotelRoom.PetFriendly);
+            }
+        }
+
+        public class RoomTestSuite
+        {
+            
+            Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom};
+
+            [Fact]
+            public void TestingID()
+            {
+                Assert.Equal(1, testRoom.ID);
+            }
+
+            [Fact]
+            public void TestingName()
+            {
+                Assert.Equal("name", testRoom.Name);
+            }
+
+            [Fact]
+            public void TestingLayout()
+            {
+                Assert.Equal(Layout.OneBedroom, testRoom.Layout);
             }
         }
     }
