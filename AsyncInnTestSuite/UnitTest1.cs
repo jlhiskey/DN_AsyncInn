@@ -9,6 +9,7 @@ using DN_AsyncInn.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
+
 namespace AsyncInnTestSuite
 {
     public class GetSetTestSuite
@@ -313,42 +314,272 @@ namespace AsyncInnTestSuite
         }
 
         public class RoomTestSuite
-        {   
-            Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom};
+        {
+            public Room CreateRoom()
+            {
+                HotelRoom testHotelRoom1 = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true };
+                HotelRoom testHotelRoom2 = new HotelRoom() { HotelID = 1, RoomNumber = 2, RoomID = 1, Rate = 150, PetFriendly = false };
+                List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom1, testHotelRoom2 };
+                ICollection<HotelRoom> hotelRooms = testList1;
+
+                RoomAmenities testRoomAmenity1 = new RoomAmenities() { AmenitiesID = 1, RoomID = 1 };
+                RoomAmenities testRoomAmenity2 = new RoomAmenities() { AmenitiesID = 2, RoomID = 1 };
+                List<RoomAmenities> testList2 = new List<RoomAmenities>() { testRoomAmenity1, testRoomAmenity2 };
+                ICollection<RoomAmenities> roomAmenities = testList2;
+
+                Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom, HotelRooms = hotelRooms, RoomAmenities = roomAmenities };
+
+                return testRoom;
+            }
 
             [Fact]
-            public void TestingID()
+            public void TestingIDGet()
             {
+                Room testRoom = CreateRoom();
                 Assert.Equal(1, testRoom.ID);
             }
 
             [Fact]
-            public void TestingName()
+            public void TestingIDSet()
             {
+                Room testRoom = CreateRoom();
+                testRoom.ID = 2;
+                Assert.Equal(2, testRoom.ID);
+            }
+
+            [Fact]
+            public void TestingNameGet()
+            {
+                Room testRoom = CreateRoom();
                 Assert.Equal("name", testRoom.Name);
             }
 
             [Fact]
-            public void TestingLayout()
+            public void TestingNameSet()
             {
+                Room testRoom = CreateRoom();
+                testRoom.Name = "bob";
+                Assert.Equal("bob", testRoom.Name);
+            }
+
+            [Fact]
+            public void TestingLayoutGet()
+            {
+                Room testRoom = CreateRoom();
                 Assert.Equal(Layout.OneBedroom, testRoom.Layout);
+            }
+
+            [Fact]
+            public void TestingLayoutSet()
+            {
+                Room testRoom = CreateRoom();
+                testRoom.Layout = Layout.Studio;
+                Assert.Equal(Layout.Studio, testRoom.Layout);
+            }
+
+            [Fact]
+            public void TestingHotelRoomsGet()
+            {
+                Room testRoom = CreateRoom();
+
+                HotelRoom testHotelRoom1 = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true };
+                HotelRoom testHotelRoom2 = new HotelRoom() { HotelID = 1, RoomNumber = 2, RoomID = 1, Rate = 150, PetFriendly = false };
+                List<HotelRoom> testList = new List<HotelRoom>() { testHotelRoom1, testHotelRoom2 };
+                ICollection<HotelRoom> hotelRooms = testList;
+
+                ICollection<HotelRoom> expected = testList;
+                ICollection<HotelRoom> actual = testRoom.HotelRooms;
+                HotelRoom[] expectedArray = new HotelRoom[expected.Count];
+                expected.CopyTo(expectedArray, 0);
+
+                HotelRoom[] actualArray = new HotelRoom[actual.Count];
+                expected.CopyTo(actualArray, 0);
+
+                Assert.Equal(expectedArray, actualArray);
+            }
+
+            [Fact]
+            public void TestingHotelRoomsSet()
+            {
+                Room testRoom = CreateRoom();
+
+                HotelRoom testHotelRoom1 = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true };
+                HotelRoom testHotelRoom2 = new HotelRoom() { HotelID = 1, RoomNumber = 2, RoomID = 1, Rate = 150, PetFriendly = false };
+                HotelRoom testHotelRoom3 = new HotelRoom() { HotelID = 1, RoomNumber = 3, RoomID = 1, Rate = 200, PetFriendly = false };
+                List<HotelRoom> testList = new List<HotelRoom>() { testHotelRoom1, testHotelRoom2, testHotelRoom3 };
+                ICollection<HotelRoom> hotelRooms = testList;
+
+                ICollection<HotelRoom> expected = testList;
+
+                testRoom.HotelRooms.Add(testHotelRoom3);
+
+                ICollection<HotelRoom> actual = testRoom.HotelRooms;
+                HotelRoom[] expectedArray = new HotelRoom[expected.Count];
+                expected.CopyTo(expectedArray, 0);
+
+                HotelRoom[] actualArray = new HotelRoom[actual.Count];
+                expected.CopyTo(actualArray, 0);
+
+                Assert.Equal(expectedArray, actualArray);
+            }
+
+            [Fact]
+            public void TestingRoomAmenitesGet()
+            {
+                Room testRoom = CreateRoom();
+
+                RoomAmenities testRoomAmenity1 = new RoomAmenities() { AmenitiesID = 1, RoomID = 1 };
+                RoomAmenities testRoomAmenity2 = new RoomAmenities() { AmenitiesID = 2, RoomID = 1 };
+                List<RoomAmenities> testList = new List<RoomAmenities>() { testRoomAmenity1, testRoomAmenity2 };
+                ICollection<RoomAmenities> roomAmenities = testList;
+
+                ICollection<RoomAmenities> expected = testList;
+                ICollection<RoomAmenities> actual = testRoom.RoomAmenities;
+                RoomAmenities[] expectedArray = new RoomAmenities[expected.Count];
+                expected.CopyTo(expectedArray, 0);
+
+                RoomAmenities[] actualArray = new RoomAmenities[actual.Count];
+                expected.CopyTo(actualArray, 0);
+
+                Assert.Equal(expectedArray, actualArray);
+            }
+
+            [Fact]
+            public void TestingRoomAmenitesSet()
+            {
+                Room testRoom = CreateRoom();
+
+                RoomAmenities testRoomAmenity1 = new RoomAmenities() { AmenitiesID = 1, RoomID = 1 };
+                RoomAmenities testRoomAmenity2 = new RoomAmenities() { AmenitiesID = 2, RoomID = 1 };
+                RoomAmenities testRoomAmenity3 = new RoomAmenities() { AmenitiesID = 3, RoomID = 1 };
+
+                List<RoomAmenities> testList = new List<RoomAmenities>() { testRoomAmenity1, testRoomAmenity2, testRoomAmenity3 };
+                ICollection<RoomAmenities> roomAmenities = testList;
+
+                ICollection<RoomAmenities> expected = testList;
+
+                testRoom.RoomAmenities.Add(testRoomAmenity3);
+
+                ICollection<RoomAmenities> actual = testRoom.RoomAmenities;
+                RoomAmenities[] expectedArray = new RoomAmenities[expected.Count];
+                expected.CopyTo(expectedArray, 0);
+
+                RoomAmenities[] actualArray = new RoomAmenities[actual.Count];
+                expected.CopyTo(actualArray, 0);
+
+                Assert.Equal(expectedArray, actualArray);
             }
         }
 
         public class RoomAmenitiesTestSuite
         {
-            RoomAmenities testRoomAmenity = new RoomAmenities() { AmenitiesID = 1, RoomID = 1 };
+            public RoomAmenities CreateRoomAmenity()
+            {
+                RoomAmenities testRoomAmenity = new RoomAmenities() { AmenitiesID = 1, RoomID = 1 };
+
+                HotelRoom testHotelRoom = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true };
+
+                List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
+                ICollection<HotelRoom> hotelRooms = testList1;
+
+                List<RoomAmenities> testList2 = new List<RoomAmenities>() { testRoomAmenity };
+                ICollection<RoomAmenities> roomAmenities = testList2;
+
+                Amenities testAmenity = new Amenities() { ID = 1, Name = "name", RoomAmenities = roomAmenities };
+
+                Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
+
+                testRoomAmenity.Amenities = testAmenity;
+                testRoomAmenity.Room = testRoom;
+
+                return testRoomAmenity;
+            }
+            
 
             [Fact]
-            public void TestingID()
+            public void TestingAmenityIDGet()
             {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
                 Assert.Equal(1, testRoomAmenity.AmenitiesID);
             }
 
             [Fact]
-            public void TestingName()
+            public void TestingAmenityIDSet()
             {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
+                testRoomAmenity.AmenitiesID = 2;
+                Assert.Equal(2, testRoomAmenity.AmenitiesID);
+            }
+
+            [Fact]
+            public void TestingRoomIDGet()
+            {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
                 Assert.Equal(1, testRoomAmenity.RoomID);
+            }
+
+            [Fact]
+            public void TestingRoomIDSet()
+            {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
+                testRoomAmenity.RoomID = 2;
+                Assert.Equal(2, testRoomAmenity.RoomID);
+            }
+
+            [Fact]
+            public void TestingRoomGet()
+            {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
+
+                HotelRoom testHotelRoom = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true };
+                List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
+                ICollection<HotelRoom> hotelRooms = testList1;
+                Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
+
+                Assert.Equal(testRoom.ID, testRoomAmenity.Room.ID);
+            }
+
+            [Fact]
+            public void TestingRoomSet()
+            {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
+
+                HotelRoom testHotelRoom = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true };
+                List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
+                ICollection<HotelRoom> hotelRooms = testList1;
+                Room testRoom = new Room() { ID = 2, Name = "name2", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
+
+                testRoomAmenity.Room = testRoom;
+
+                Assert.Equal(testRoom.ID, testRoomAmenity.Room.ID);
+            }
+
+            [Fact]
+            public void TestingAmenityGet()
+            {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
+
+                List<RoomAmenities> testList2 = new List<RoomAmenities>() { testRoomAmenity };
+                ICollection<RoomAmenities> roomAmenities = testList2;
+
+                Amenities testAmenity = new Amenities() { ID = 1, Name = "name", RoomAmenities = roomAmenities };
+
+                Assert.Equal(testAmenity.ID, testRoomAmenity.Amenities.ID);
+            }
+
+            [Fact]
+            public void TestingAmenitySet()
+            {
+                RoomAmenities testRoomAmenity = CreateRoomAmenity();
+
+                List<RoomAmenities> testList2 = new List<RoomAmenities>() { testRoomAmenity };
+                ICollection<RoomAmenities> roomAmenities = testList2;
+
+                Amenities testAmenity = new Amenities() { ID = 2, Name = "name", RoomAmenities = roomAmenities };
+
+                testRoomAmenity.Amenities = testAmenity;
+
+                Assert.Equal(testAmenity.ID, testRoomAmenity.Amenities.ID);
             }
         }
     }
