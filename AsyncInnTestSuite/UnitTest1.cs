@@ -57,5 +57,40 @@ namespace AsyncInnTestSuite
                 Assert.Equal("123-123-1234", testHotel.Phone);
             }
         }
+
+        public class HotelRoomTestSuite
+        {
+            HotelRoom testHotelRoom = new HotelRoom() { HotelID = 1, RoomNumber = 1, RoomID = 1, Rate = 100, PetFriendly = true  };
+
+            [Fact]
+            public void TestingHotelID()
+            {
+                Assert.Equal(1, testHotelRoom.HotelID);
+            }
+
+            [Fact]
+            public void TestingRoomNumber()
+            {
+                Assert.Equal(1, testHotelRoom.RoomNumber);
+            }
+
+            [Fact]
+            public void TestingRoomID()
+            {
+                Assert.Equal(1, testHotelRoom.RoomID);
+            }
+
+            [Fact]
+            public void TestingRate()
+            {
+                Assert.Equal(100, testHotelRoom.Rate);
+            }
+
+            [Fact]
+            public void TestingPetFriendly()
+            {
+                Assert.True(testHotelRoom.PetFriendly);
+            }
+        }
     }
 }
