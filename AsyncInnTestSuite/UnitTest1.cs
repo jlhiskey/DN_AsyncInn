@@ -14,7 +14,7 @@ namespace AsyncInnTestSuite
 {
     public class GetSetTestSuite
     {
-        
+
         public class AmenitiesTestSuite
         {
             public Amenities CreateAmenity()
@@ -26,7 +26,7 @@ namespace AsyncInnTestSuite
                 Amenities testAmenity = new Amenities() { ID = 1, Name = "name", RoomAmenities = roomAmenities };
                 return testAmenity;
             }
-                    
+
             [Fact]
             public void TestingIDGet()
             {
@@ -235,7 +235,7 @@ namespace AsyncInnTestSuite
 
                 return testHotelRoom;
             }
-            
+
 
             [Fact]
             public void TestingHotelIDGet()
@@ -316,7 +316,7 @@ namespace AsyncInnTestSuite
             public void TestingRoomGet()
             {
                 HotelRoom testHotelRoom = CreateHotelRoom();
- 
+
                 List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
                 ICollection<HotelRoom> hotelRooms = testList1;
                 Room testRoom = new Room() { ID = 1, Name = "name", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
@@ -331,7 +331,7 @@ namespace AsyncInnTestSuite
 
                 List<HotelRoom> testList1 = new List<HotelRoom>() { testHotelRoom };
                 ICollection<HotelRoom> hotelRooms = testList1;
-                
+
                 Room testRoom = new Room() { ID = 2, Name = "name2", Layout = Layout.OneBedroom, HotelRooms = hotelRooms };
 
                 testHotelRoom.Room = testRoom;
@@ -549,7 +549,7 @@ namespace AsyncInnTestSuite
 
                 return testRoomAmenity;
             }
-            
+
 
             [Fact]
             public void TestingAmenityIDGet()
@@ -646,19 +646,80 @@ namespace AsyncInnTestSuite
             [Fact]
             public async void CanCreateAmenity()
             {
-                //dbcontextoptions<asyncinndbcontext> options = new dbcontextoptionsbuilder<asyncinndbcontext>().useinmemorydatabase("createamenity").options;
+                DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateAmenity").Options;
 
-                //using (AsyncInnDbContext context = new AsyncInnDbContext(options))
-                //{
-                //    Amenities testAmenity = new Amenities() { ID = 1, Name = "name", };
+                using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                {
+                    Amenities testAmenity = new Amenities() { ID = 1, Name = "name", };
 
-                //    AmenitiesManagementService amenityServices = new AmenitiesManagementService(context);
+                    AmenitiesManagementService amenityServices = new AmenitiesManagementService(context);
 
-                //    await amenityServices.CreateAmenity(testAmenity);
+                    await amenityServices.CreateAmenity(testAmenity);
 
-                //    var result = context.Amenities.FirstOrDefault(a => a.ID == testAmenity.ID);
+                    var result = context.Amenities.FirstOrDefault(a => a.ID == testAmenity.ID);
 
-                //    Assert.Equal(testAmenity, result);
+                    Assert.Equal(testAmenity, result);
+                }
+            }
+
+            [Fact]
+            public async void CanReadAmenity()
+            {
+                DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("GetAmenity").Options;
+
+                using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                {
+                    Amenities testAmenity = new Amenities() { ID = 1, Name = "name", };
+
+                    AmenitiesManagementService amenityServices = new AmenitiesManagementService(context);
+
+                    await amenityServices.CreateAmenity(testAmenity);
+                    await amenityServices.GetAmenity(testAmenity.ID);
+
+                    var result = context.Amenities.FirstOrDefault(a => a.ID == testAmenity.ID);
+
+                    Assert.Equal(testAmenity, result);
+                }
+            }
+
+            [Fact]
+            public async void CanUpdateAmenity()
+            {
+                DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("UpdateAmenity").Options;
+
+                using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                {
+                    Amenities testAmenity = new Amenities() { ID = 1, Name = "name", };
+
+                    AmenitiesManagementService amenityServices = new AmenitiesManagementService(context);
+                    await amenityServices.CreateAmenity(testAmenity);
+                    testAmenity.Name = "bob";
+                    amenityServices.UpdateAmenity(testAmenity);
+
+                    var result = context.Amenities.FirstOrDefault(a => a.ID == testAmenity.ID);
+
+                    Assert.Equal(testAmenity, result);
+                }
+            }
+
+            [Fact]
+            public async void CanDeleteAmenity()
+            {
+                DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("DeleteAmenity").Options;
+
+                using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                {
+                    Amenities testAmenity = new Amenities() { ID = 1, Name = "name", };
+
+                    AmenitiesManagementService amenityServices = new AmenitiesManagementService(context);
+                    await amenityServices.CreateAmenity(testAmenity);
+                    
+                    amenityServices.DeleteAmenity(testAmenity);
+
+                    var result = context.Amenities.FirstOrDefault(a => a.ID == testAmenity.ID);
+
+                    Assert.Null(result);
+                }
             }
         }
     }
