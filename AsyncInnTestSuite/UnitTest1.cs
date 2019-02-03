@@ -2,11 +2,12 @@ using System.Linq;
 using DN_AsyncInn.Data;
 using DN_AsyncInn.Models;
 using DN_AsyncInn.Models.Services;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace AsyncInnTestSuite
 {
-    public class ModelTestSuite
+    public class GetSetTestSuite
     {
         
         public class AmenitiesTestSuite
@@ -129,5 +130,32 @@ namespace AsyncInnTestSuite
                 Assert.Equal(1, testRoomAmenity.RoomID);
             }
         }
+    }
+
+    public class CRUDTestSuite
+    {
+        public class AmenitiesServicesTestSuite
+        {
+            [Fact]
+            public async void CanCreateAmenity()
+            {
+                DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateAmenity").Options;
+
+                using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+                {
+                    Amenities testAmenity = new Amenities() { ID = 1, Name = "name", };
+
+                    AmenitiesManagementService amenityServices = new AmenitiesManagementService(context);
+
+                    await amenityServices.CreateAmenity(testAmenity);
+
+                    var result = context.Amenities.FirstOrDefault(a => a.ID == testAmenity.ID);
+
+                    Assert.Equal(testAmenity, result);
+                }
+            }
+        }
+            
+
     }
 }
