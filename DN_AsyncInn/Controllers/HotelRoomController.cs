@@ -62,15 +62,22 @@ namespace DN_AsyncInn.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
-            if (ModelState.IsValid)
+            var existingRoom = _context.HotelRooms.FirstOrDefault(m => m.HotelID == hotelRoom.HotelID && m.RoomNumber == hotelRoom.RoomNumber);
+
+            if (existingRoom == null)
             {
-                _context.Add(hotelRoom);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(hotelRoom);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+                ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomID);
+                return View(hotelRoom);
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
-            ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomID);
-            return View(hotelRoom);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: HotelRoom/Edit/5
