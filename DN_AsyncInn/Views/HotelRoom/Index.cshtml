@@ -22,12 +22,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.PetFriendly)
                 </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.Hotel)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Hotel.HotelRooms.Count)
-                </th>
+
                 <th></th>
             </tr>
         </thead>
@@ -44,16 +43,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PetFriendly)
                 </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Hotel.Name)
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.Hotel.HotelRooms.Count)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Edit", "Edit", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
+                    @Html.ActionLink("Details", "Details", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) 
+
                 </td>
             </tr>
             }

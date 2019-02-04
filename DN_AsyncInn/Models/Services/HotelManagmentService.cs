@@ -31,11 +31,18 @@ namespace DN_AsyncInn.Models.Services
             _context.SaveChanges();
         }
 
-        public void DeleteHotel(int id)
+        public async Task DeleteHotel(int id)
         {
-            Hotel hotel = _context.Hotels.FirstOrDefault(h => h.ID == id);
+            Hotel hotel = _context.Hotels.FirstOrDefault(ho => ho.ID == id);
             _context.Hotels.Remove(hotel);
-            _context.SaveChanges();
+
+            var hotelRooms = await _context.HotelRooms.Where(hr => hr.HotelID == hotel.ID).ToListAsync();
+            foreach (HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Hotel> GetHotel(int id)
@@ -57,7 +64,13 @@ namespace DN_AsyncInn.Models.Services
 
         public async Task<IEnumerable<Hotel>> GetHotels()
         {
-            return await _context.Hotels.ToListAsync();
+            var hotels = await _context.Hotels.ToListAsync(); // initial call out to grab hotels
+
+            foreach (Hotel hotel in hotels) // loop through and identify in  hotel room table where hotelID is equal to current hotels ID, push into Rooms
+            {
+                hotel.HotelRooms = await _context.HotelRooms.Where(ro => ro.HotelID == hotel.ID).ToListAsync();
+            }
+            return hotels;
         }
 
         /// <summary>
@@ -75,7 +88,18 @@ namespace DN_AsyncInn.Models.Services
             return await hotels.ToListAsync();
         }
 
+        /// <summary>
+        /// I created this but its not being implemented even though I know it should be. I ran out of time...
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<HotelRoom>> GetHotelRooms(int hotelID)
+        {
+            var hotelRooms = from hr in _context.HotelRooms
+                             select hr;
+            hotelRooms = hotelRooms.Where(hr => hr.HotelID == hotelID);
 
-        
+            return await hotelRooms.ToListAsync();
+        }
     }
 }

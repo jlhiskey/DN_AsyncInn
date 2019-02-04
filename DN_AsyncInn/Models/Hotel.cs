@@ -15,11 +15,12 @@ namespace DN_AsyncInn.Models
         [Required]
         public string Address { get; set; }
         [Required]
-        public string Phone { get; set; }  
-        
-        
+        public string Phone { get; set; }
+
+
         //Navigation Properties
 
+        [Display(Name = "Total Hotel Rooms")]
         public ICollection<HotelRoom> HotelRooms { get; set; }
     }
 }

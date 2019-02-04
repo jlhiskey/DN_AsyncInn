@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DN_AsyncInn.Data;
 using DN_AsyncInn.Models;
-using DN_AsyncInn.Models.Interfaces;
+
 
 namespace DN_AsyncInn.Controllers
 {
@@ -23,23 +23,22 @@ namespace DN_AsyncInn.Controllers
         // GET: HotelRoom
         public async Task<IActionResult> Index()
         {
-            var asyncInnDbContext = _context.HotelRooms.Include(h => h.Hotel);
+            var asyncInnDbContext = _context.HotelRooms.Include(h => h.Hotel).Include(h => h.Room);
             return View(await asyncInnDbContext.ToListAsync());
         }
 
         
 
         // GET: HotelRoom/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int hotelID, decimal roomID, int roomNumber)
         {
-            if (id == null)
+            if (hotelID == 0 || roomID == 0)
             {
                 return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms
-                .Include(h => h.Hotel)
-                .FirstOrDefaultAsync(m => m.HotelID == id);
+            var hotelRoom = await _context.HotelRooms.FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID && m.RoomNumber == roomNumber);
+
             if (hotelRoom == null)
             {
                 return NotFound();
@@ -63,30 +62,40 @@ namespace DN_AsyncInn.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
-            if (ModelState.IsValid)
+            var existingRoom = _context.HotelRooms.FirstOrDefault(m => m.HotelID == hotelRoom.HotelID && m.RoomNumber == hotelRoom.RoomNumber);
+
+            if (existingRoom == null)
             {
-                _context.Add(hotelRoom);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(hotelRoom);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+                ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomID);
+                return View(hotelRoom);
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
-            return View(hotelRoom);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: HotelRoom/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        
+        public async Task<IActionResult> Edit(int hotelID, decimal roomID, int roomNumber)
         {
-            if (id == null)
+            if (hotelID == 0 || roomID == 0)
             {
                 return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            var hotelRoom = await _context.HotelRooms.FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID && m.RoomNumber == roomNumber);
+            
             if (hotelRoom == null)
             {
                 return NotFound();
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+            
             return View(hotelRoom);
         }
 
@@ -95,9 +104,9 @@ namespace DN_AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
+        public async Task<IActionResult> Edit(int hotelID, [Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
-            if (id != hotelRoom.HotelID)
+            if (hotelID != hotelRoom.HotelID)
             {
                 return NotFound();
             }
@@ -120,23 +129,24 @@ namespace DN_AsyncInn.Controllers
                         throw;
                     }
                 }
+                ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+                ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomID);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelID);
+            
             return View(hotelRoom);
         }
 
         // GET: HotelRoom/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int hotelID, decimal roomID, int roomNumber)
         {
-            if (id == null)
+            if (hotelID == 0 || roomID == 0)
             {
                 return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms
-                .Include(h => h.Hotel)
-                .FirstOrDefaultAsync(m => m.HotelID == id);
+            var hotelRoom = await _context.HotelRooms.FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID && m.RoomNumber == roomNumber);
+
             if (hotelRoom == null)
             {
                 return NotFound();
@@ -148,9 +158,9 @@ namespace DN_AsyncInn.Controllers
         // POST: HotelRoom/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(HotelRoom hotelRoom)
         {
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            
             _context.HotelRooms.Remove(hotelRoom);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
