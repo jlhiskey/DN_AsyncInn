@@ -63,6 +63,8 @@ namespace DN_AsyncInn.Controllers
             if (ModelState.IsValid)
             {
                 await _context.CreateAmenity(amenity);
+
+                return RedirectToAction(nameof(Index));
             }
             return View(amenity);
         }
