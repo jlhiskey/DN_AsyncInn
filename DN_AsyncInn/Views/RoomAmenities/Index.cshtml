@@ -5,39 +5,41 @@
     Layout = "_Layout";
 }
 
-<h1>Room Amenities</h1>
+@{<partial name="_NavBarPartial" />}
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
-<table class="table" align="center">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Amenities)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Room)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <h1>Room Amenities</h1>
+
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+    <table class="table" align="center">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amenities.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Room.Name)
-                </td>
-                <td>
-
-                    @Html.ActionLink("Delete", "Delete", new { roomID = item.RoomID, amenityID = item.AmenitiesID })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amenities)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<a class="btn btn-primary" asp-controller="Home" asp-action="Index">Go Home</a>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amenities.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Room.Name)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Delete", "Delete", new { roomID = item.RoomID, amenityID = item.AmenitiesID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Go Home</a>

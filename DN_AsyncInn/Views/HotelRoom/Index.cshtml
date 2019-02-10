@@ -1,38 +1,40 @@
 ﻿@model IEnumerable<DN_AsyncInn.Models.HotelRoom>
 
-    @{
-        ViewData["Title"] = "Index";
-        Layout = "_Layout";
-    }
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
 
-    <h1>Hotel Rooms</h1>
+@{<partial name="_NavBarPartial" />}
 
-    <p>
-        <a class="btn btn-primary" asp-action="Create">Create New</a>
-    </p>
-    <table class="table" align="center">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RoomNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Rate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PetFriendly)
-                </th>
-                
-                <th>
-                    @Html.DisplayNameFor(model => model.Hotel)
-                </th>
+<h1>Hotel Rooms</h1>
 
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table" align="center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PetFriendly)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Hotel)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.RoomNumber)
@@ -43,7 +45,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PetFriendly)
                 </td>
-               
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Hotel.Name)
                 </td>
@@ -51,11 +53,11 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
                     @Html.ActionLink("Details", "Details", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) |
-                    @Html.ActionLink("Delete", "Delete", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber }) 
+                    @Html.ActionLink("Delete", "Delete", new { hotelID = item.HotelID, roomID = item.RoomID, roomNumber = item.RoomNumber })
 
                 </td>
             </tr>
-            }
-        </tbody>
-    </table>
-    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Go Home</a>
+        }
+    </tbody>
+</table>
+<a class="btn btn-primary" asp-controller="Home" asp-action="Index">Go Home</a>

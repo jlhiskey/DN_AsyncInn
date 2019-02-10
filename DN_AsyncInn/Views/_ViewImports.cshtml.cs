@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PersonOfTheYear.Views.Home
+namespace DN_AsyncInn.Views.Home
 {
     public class _ViewImportsModel : PageModel
     {

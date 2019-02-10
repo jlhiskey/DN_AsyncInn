@@ -10,52 +10,7 @@
     <div style="margin:30px">
         <h1>Async Inn Asset Management</h1>
     </div>
-        <div class="container" style="margin-left:0px">
-
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown" style="margin-right:10px">All Hotels</a>
-                    <div class="dropdown-menu">
-                        <a asp-controller="Hotel" asp-action="Index">View All Hotels</a>
-                        <div class="dropdown-divider"></div>
-                        <a asp-controller="Hotel" asp-action="Create">Create New Hotel</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown" style="margin-right:10px">All Rooms</a>
-                    <div class="dropdown-menu">
-                        <a asp-controller="Room" asp-action="Index">View All Room Types</a>
-                        <div class="dropdown-divider"></div>
-                        <a asp-controller="Room" asp-action="Create">Create New Room Type</a>
-
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown" style="margin-right:10px">All Amenities</a>
-                    <div class="dropdown-menu">
-                        <a asp-controller="Amenities" asp-action="Index">View All Amenities</a>
-                        <div class="dropdown-divider"></div>
-                        <a asp-controller="Amenities" asp-action="Create">Create New Amenity</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown" style="margin-right:10px">Hotel Rooms</a>
-                    <div class="dropdown-menu">
-                        <a asp-controller="HotelRoom" asp-action="Index">View All Hotel Rooms</a>
-                        <div class="dropdown-divider"></div>
-                        <a asp-controller="HotelRoom" asp-action="Create">Create New Hotel Room</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown" style="margin-right:10px">Room Amenities</a>
-                    <div class="dropdown-menu">
-                        <a asp-controller="RoomAmenities" asp-action="Index">View All Room Amenities</a>
-                        <div class="dropdown-divider"></div>
-                        <a asp-controller="RoomAmenities" asp-action="Create">Create New Room Amenity</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+       
         <div style="margin-left:30px">
 
             @RenderBody()

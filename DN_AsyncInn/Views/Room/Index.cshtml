@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<DN_AsyncInn.Models.Room>
 
-    @{
-        ViewData["Title"] = "Index";
-        Layout = "_Layout";
-    }
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+@{<partial name="_NavBarPartial" />}
 
     <h1>All Rooms Types</h1>
     <div>Total number of Room Types: @Model.Count()  </div>
@@ -37,27 +39,25 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Layout)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomAmenities.Count)
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Layout)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomAmenities.Count)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
     <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Go Home</a>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
